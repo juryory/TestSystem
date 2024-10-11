@@ -160,3 +160,7 @@ button:hover {
     background-color: #F0C17F;
 }
 
+input[type="radio"],
+input[type="checkbox"] {
+    display: none;
+}
