@@ -1,0 +1,3 @@
+id,question,options,correct_answer,type
+1,这是单选题,"A|B|C|D",A,single
+2,这是多选题,"A|B|C|D",A|C,multiple

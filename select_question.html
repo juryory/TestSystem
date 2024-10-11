@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选题页面</title>
+    <style>
+        /* 设置背景图片覆盖整个页面 */
+        body {
+            background-image: url('assets/background.webp');
+            background-size: cover; /* 图片覆盖整个页面 */
+            background-position: center; /* 图片居中显示 */
+            background-repeat: no-repeat; /* 图片不重复 */
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh; /* 确保 body 至少占满整个窗口的高度 */
+            font-family: Arial, sans-serif;
+        }
+
+        /* 样式 */
+        .question-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .question-item {
+            margin: 10px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明背景，便于在图片上展示 */
+            cursor: pointer;
+            border-radius: 8px; /* 圆角 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+            transition: transform 0.2s ease; /* 交互动画 */
+        }
+
+        /* 悬停时的放大效果 */
+        .question-item:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>请选择一个题目</h1>
+    <div class="question-list">
+        <!-- 24 个题目按钮 -->
+        <div class="question-item" data-index="0">题目 1</div>
+        <div class="question-item" data-index="1">题目 2</div>
+        <div class="question-item" data-index="2">题目 3</div>
+        <!-- 继续添加到题目 24 -->
+    </div>
+
+    <script>
+        // 为每个按钮绑定点击事件
+        document.querySelectorAll('.question-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const questionIndex = this.getAttribute('data-index');
+                // 跳转到题目页面并传递题目序号
+                window.location.href = `question.html?index=${questionIndex}`;
+            });
+        });
+    </script>
+</body>
+</html>

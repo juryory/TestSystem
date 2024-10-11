@@ -1,0 +1,162 @@
+/* 清除所有默认样式 */
+body, h1, div, span, button, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* body 样式：整体背景和尺寸固定 */
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; /* 背景颜色（可选） */
+}
+
+/* 1.1 container */
+.container {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    background-image: url('../assets/images/background.webp'); /* 背景图片 */
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* 1.1.1 section1 */
+.section1 {
+    width: 1920px;
+    height: 194px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 1.1.1.1 H1：标题 */
+.section1 h1 {
+    font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
+    font-weight: bold;
+    font-size: 114px;
+    color: #F6CA77;
+    text-shadow: 0 9px 13px rgba(0, 0, 0, 0.5); /* 阴影 */
+}
+
+/* 1.1.2 section2 */
+.section2 {
+    width: 1920px;
+    height: 780px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 1.1.1.2 div1：左侧列 */
+.div1 {
+    width: 1430px;
+    height: 780px;
+    margin-left: 40px; /* 左边距 40px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 1.1.1.2.1 div2：问题和选项区域 */
+.div2 {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* 透明度为 30 的黑色背景 */
+    border-radius: 32px;
+    border: 5px solid #F0C17F; /* 边框颜色 */
+    padding: 20px;
+}
+
+/* 1.1.1.2.1.1 section3：问题部分 */
+.section3 {
+    font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
+    font-weight: bold;
+    font-size: 50px;
+    color: #EDD19D;
+}
+
+/* 1.1.1.2.1.1.1 paragraph：问题文本 */
+.section3 p {
+    font-size: 50px;
+    color: #EDD19D;
+    margin-bottom: 20px;
+}
+
+/* 1.1.1.2.1.2 section4：选项部分 */
+.section4 {
+    font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
+    font-weight: bold;
+    font-size: 50px;
+    color: #EDD19D;
+}
+
+/* 1.1.1.2.1.2.1 div3：选项 */
+.div3 {
+    margin-top: 20px;
+}
+
+/* 1.1.1.3 div4：右侧列 */
+.div4 {
+    width: 390px;
+    height: 780px;
+    margin-left: 20px; /* 左边距 20px */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 1.1.1.3.1 section3：倒计时/答案区域 */
+.section3-timer-answer {
+    width: 388px;
+    height: 409px;
+    background-color: rgba(0, 0, 0, 0.3); /* 透明度为 30 的黑色背景 */
+    border-radius: 32px;
+    border: 5px solid #F0C17F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 倒计时/答案文字 */
+.section3-timer-answer .text-block {
+    font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
+    font-weight: bold;
+    font-size: 200px;
+    color: #EDD19D;
+    text-align: center;
+    word-wrap: break-word; /* Wrap 属性 */
+}
+
+/* 1.1.1.3.2 section4：按钮区域 */
+.section4-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 按钮样式 */
+button {
+    width: 390px;
+    height: 90px;
+    margin-top: 35px;
+    background-color: #F6CA77;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
+    font-weight: bold;
+    font-size: 50px;
+    color: #7c1700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #F0C17F;
+}
+
