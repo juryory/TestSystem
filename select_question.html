@@ -4,103 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>选题页面</title>
-    <style>
-        /* 设置背景图片覆盖整个页面 */
-        body {
-            background-image: url('assets/background.webp');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-
-        /* 样式 */
-        .question-list {
-            display: grid;
-            justify-content: center;
-            grid-gap: 10px;
-            margin-top: 50px;
-        }
-
-        .question-item {
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-
-        /* 悬停时的放大效果 */
-        .question-item:hover {
-            transform: scale(1.05);
-        }
-
-        /* 隐藏的样式，保留布局空间 */
-        .hidden {
-            visibility: hidden; /* 隐藏但保留布局 */
-        }
-    </style>
+    <link rel="stylesheet" href="css/select_question.css"> <!-- 引用外部CSS -->
 </head>
 <body>
-    <h1>请选择一个题目</h1>
-    <div class="question-list"></div> <!-- 动态生成题目按钮的容器 -->
+    <div class="container">
+        <!-- 1.1.1 section: 标题容器 -->
+        <section class="title-section">
+            <h1>请选择一个题目</h1>
+        </section>
 
-    <script>
-        // 设置列数和行数
-        const columns = 8; // 列数
-        const rows = 3; // 行数
+        <!-- 1.1.2 section: 选题容器 -->
+        <section class="question-section">
+            <div class="grid"></div> <!-- 按钮容器（由JS生成按钮）-->
+        </section>
 
-        // 计算总题目数量
-        const totalQuestions = columns * rows;
+        <!-- 新增的“下一轮”按钮，放在选题容器下方 -->
+        <div class="next-round-container">
+            <button class="next-round-button">下一轮</button>
+        </div>
+    </div>
 
-        // 获取容器
-        const questionList = document.querySelector('.question-list');
-
-        // 设置 grid 样式，基于列数生成网格布局
-        questionList.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
-
-        // 动态生成题目按钮
-        for (let i = 0; i < totalQuestions; i++) {
-            const questionItem = document.createElement('div');
-            questionItem.classList.add('question-item');
-            questionItem.id = `question-${i + 1}`;
-            questionItem.setAttribute('data-index', i);
-            questionItem.textContent = `题目 ${i + 1}`;
-
-            // 添加点击事件
-            questionItem.addEventListener('click', function() {
-                // 隐藏当前点击的按钮但保留其位置
-                questionItem.classList.add('hidden');
-                localStorage.setItem(`questionHidden-${i}`, 'true'); // 保存状态
-
-                // 跳转到题目页面并传递题目序号
-                window.location.href = `index.html?index=${i}`;
-            });
-
-            // 检查 localStorage 中是否记录了隐藏状态
-            if (localStorage.getItem(`questionHidden-${i}`) === 'true') {
-                questionItem.classList.add('hidden'); // 隐藏但保留布局
-            }
-
-            // 添加到容器中
-            questionList.appendChild(questionItem);
-        }
-
-        // 监听键盘事件，按下 "K" 键时重置按钮状态
-        document.addEventListener('keydown', function(event) {
-            if (event.key.toLowerCase() === 'k') {
-                document.querySelectorAll('.question-item').forEach(item => {
-                    const questionIndex = item.getAttribute('data-index');
-                    localStorage.removeItem(`questionHidden-${questionIndex}`);
-                    item.classList.remove('hidden'); // 显示按钮
-                });
-            }
-        });
-    </script>
+    <script src="js/select_question.js"></script> <!-- 引用外部JS -->
 </body>
 </html>
