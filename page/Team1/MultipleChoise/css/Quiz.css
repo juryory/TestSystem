@@ -20,7 +20,7 @@ body {
     width: 1920px;
     height: 1080px;
     position: relative;
-    background-image: url('../assets/images/background.webp'); /* 背景图片 */
+    background-image: url('../../../../assets/images/background.webp'); /* 背景图片 */
     background-size: cover;
     background-position: center;
     overflow: hidden;

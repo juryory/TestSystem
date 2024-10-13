@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let isMultiSelect = false;
 
     // 加载 CSV 文件并显示对应题目
-    Papa.parse("data/questions.csv", {
+    Papa.parse("data/Quiz.csv", {
         download: true,
         header: true,
         complete: function(results) {
@@ -163,6 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 返回选题页面
     document.getElementById("select-question").addEventListener("click", () => {
-        window.location.href = "select_question.html"; // 请确保此路径正确指向选题页面
+        window.location.href = "SelectQuestion.html"; // 请确保此路径正确指向选题页面
     });
 });

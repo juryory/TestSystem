@@ -23,7 +23,7 @@ for (let i = 0; i < totalQuestions; i++) {
     questionItem.addEventListener('click', function() {
         questionItem.classList.add('hidden');
         localStorage.setItem(`questionHidden-${i}`, 'true');
-        window.location.href = `index.html?index=${i}`;
+        window.location.href = `Quiz.html?index=${i}`;
     });
 
     // 检查 localStorage 中是否记录了隐藏状态
