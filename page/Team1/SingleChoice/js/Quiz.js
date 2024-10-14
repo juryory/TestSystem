@@ -48,52 +48,79 @@ document.addEventListener("DOMContentLoaded", () => {
             optionsContainer.appendChild(optionElement);
         });
     }
+    
+    // 获取倒计时声音和结束声音元素
+    let countdownSound = document.getElementById('countdown-sound');  // 计时时的声音（1秒钟的音效）
+    let endSound = document.getElementById('end-sound');  // 倒计时结束时的声音
 
     let timerInterval;
     let timerRunning = false;  // 用于追踪倒计时是否已经开始
-    let countdownSound = document.getElementById('countdown-sound');
-    let correctSound = document.getElementById('correct-sound');
-    let wrongSound = document.getElementById('wrong-sound');
     let isAnswerVisible = false; // 用于追踪答案是否已显示
 
     // 开始计时按钮功能
     document.getElementById("start-timer").addEventListener("click", () => {
         const timerElement = document.getElementById("timer");
+        const answerText = document.getElementById("answer-text");  // 答案区域
 
         if (timerRunning) {
-            // 再次点击时：停止倒计时并隐藏倒计时文字
+            // 停止倒计时并隐藏倒计时文字
             clearInterval(timerInterval);
             stopCountdownSound();
             timerElement.style.display = 'none';
             timerRunning = false;
         } else {
-            // 第一次点击时：开始计时并播放倒计时声音
+            // 开始倒计时并播放计时声音
             timerRunning = true;
-            let timeLeft = 5;
+            let timeLeft = 15;  // 假设倒计时15秒
             timerElement.textContent = `${timeLeft}`;
             timerElement.style.display = 'block';
+            answerText.style.display = 'none';  // 隐藏答案
+
+            // 开始计时声音并且重复播放
             countdownSound.play();
 
+            // 每秒递减时间，播放计时声音
             timerInterval = setInterval(() => {
                 timeLeft--;
                 timerElement.textContent = `${timeLeft}`;
+
+                // 每秒播放一次倒计时声音
+                countdownSound.currentTime = 0;  // 重置声音播放时间
+                countdownSound.play();  // 播放1秒的计时声音
+
+                // 当时间到0时，停止倒计时并播放结束声音
                 if (timeLeft === 0) {
                     clearInterval(timerInterval);
                     stopCountdownSound();
                     timerElement.style.display = 'none';
                     timerRunning = false;
+
+                    // 播放计时结束的声音
+                    endSound.play();
                 }
-            }, 1000);
+            }, 1000);  // 每秒执行一次
         }
     });
 
+    // 停止倒计时声音的函数
+    function stopCountdownSound() {
+        if (countdownSound) {
+            countdownSound.pause();
+            countdownSound.currentTime = 0;  // 重置音频播放进度
+        }
+    }
+
     // 提交并查看答案按钮功能
     document.getElementById("submit-answer").addEventListener("click", () => {
+        const timerElement = document.getElementById("timer");
+        const answerText = document.getElementById("answer-text");  // 答案区域
+
         if (timerRunning) {
             clearInterval(timerInterval);  // 停止倒计时
-            stopCountdownSound();  // 停止倒计时声音
+            stopCountdownSound();  // 停止计时声音
             timerRunning = false;  // 重置标志
         }
+        timerElement.style.display = 'none';  // 隐藏倒计时
         showAnswer();
     });
 
