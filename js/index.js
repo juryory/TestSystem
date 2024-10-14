@@ -1,4 +1,5 @@
-// 设置列数和行数
+// 页面标识符，确保不同页面或组的按钮有不同的标识
+const pageIdentifier = 'index'; // index 页面标识符，确保与其他页面不同
 const columns = 5; // 5列
 const rows = 1; // 1行
 const totalQuestions = columns * rows;
@@ -15,23 +16,23 @@ const links = [
 // 获取按钮容器
 const grid = document.querySelector('.grid');
 
-// 动态生成题目按钮
+// 动态生成按钮
 for (let i = 0; i < totalQuestions; i++) {
     const questionItem = document.createElement('div');
     questionItem.classList.add('question-item');
-    questionItem.id = `question-${i + 1}`;
+    questionItem.id = `question-${pageIdentifier}-${i + 1}`;  // 使用页面标识符
     questionItem.setAttribute('data-index', i);
     questionItem.textContent = `第${i + 1}组`;
 
     // 添加点击事件，隐藏按钮并保存状态
     questionItem.addEventListener('click', function() {
         questionItem.classList.add('hidden');
-        localStorage.setItem(`questionHidden-${i}`, 'true');
+        localStorage.setItem(`${pageIdentifier}-questionHidden-${i}`, 'true'); // 保存状态，带页面标识符
         window.location.href = links[i]; // 跳转到对应页面
     });
 
     // 检查 localStorage 中是否记录了隐藏状态
-    if (localStorage.getItem(`questionHidden-${i}`) === 'true') {
+    if (localStorage.getItem(`${pageIdentifier}-questionHidden-${i}`) === 'true') {
         questionItem.classList.add('hidden');
     }
 
@@ -44,7 +45,7 @@ document.addEventListener('keydown', function(event) {
     if (event.key.toLowerCase() === 'k') {
         document.querySelectorAll('.question-item').forEach(item => {
             const questionIndex = item.getAttribute('data-index');
-            localStorage.removeItem(`questionHidden-${questionIndex}`);
+            localStorage.removeItem(`${pageIdentifier}-questionHidden-${questionIndex}`);
             item.classList.remove('hidden');
         });
     }
