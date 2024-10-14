@@ -1,6 +1,6 @@
 // 页面标识符，确保不同页面或组的按钮有不同的标识
-const pageIdentifier = 'MultipleChoise-1'; // SelectQuestion 页面标识符
-const columns = 3; // 4列
+const pageIdentifier = '40Quiz-1'; // SelectQuestion 页面标识符
+const columns = 6; // 4列
 const rows = 2; // 3行
 const totalQuestions = columns * rows;
 
@@ -40,9 +40,4 @@ document.addEventListener('keydown', function(event) {
             item.classList.remove('hidden');
         });
     }
-});
-
-// 监听“下一轮”按钮的点击事件，跳转到指定网页
-document.querySelector('.next-round-button').addEventListener('click', function() {
-    window.location.href = '../PointSelection/PointSelection.html'; // 确保链接正确
 });

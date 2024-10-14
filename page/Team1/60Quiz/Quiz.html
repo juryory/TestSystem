@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60分题-题目页面</title>
+    <!-- 引入外部 CSS 文件 -->
+    <link rel="stylesheet" href="css/Quiz.css">
+</head>
+<body>
+    <!-- container: 用于包含背景图片和内容 -->
+    <div class="container">
+        <!-- section1: 标题区域 -->
+        <div class="section1">
+            <h1>60分题</h1>
+        </div>
+
+        <!-- section2: 包含题目、选项、倒计时、答案和按钮 -->
+        <div class="section2">
+            <!-- div1: 左侧题目和选项 -->
+            <div class="div1">
+                <!-- div2: 问题和选项区域 -->
+                <div class="div2">
+                    <!-- section3: 问题部分 -->
+                    <div class="section3">
+                        <p id="question-text">问题加载中...</p>
+                    </div>
+                    <!-- section4: 选项部分 -->
+                    <div class="section4">
+                        <div id="options" class="div3">
+                            <!-- 选项将动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- div4: 右侧倒计时/答案和按钮区域 -->
+            <div class="div4">
+                <!-- section3: 倒计时/答案区域 -->
+                <div class="section3-timer-answer">
+                    <span id="timer" class="text-block"></span>
+                    <span id="answer-text" class="text-block"></span>
+                </div>
+
+                <!-- section4: 按钮区域 -->
+                <div class="section4-buttons">
+                    <button id="start-timer">开始计时</button>
+                    <button id="submit-answer">提交并查看答案</button>
+                    <button id="select-question">返回选题</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入外部 JS 文件 -->
+    <script src="../../../js/papaparse.min.js"></script>
+    <script src="js/Quiz.js"></script>
+    
+    <!-- 音频文件 -->
+    <audio id="countdown-sound" src="../../../assets/audio/countdown-sound-5s.wav"></audio>
+    <audio id="correct-sound" src="../../../assets/audio/correct-sound.mp3"></audio>
+    <audio id="wrong-sound" src="../../../assets/audio/wrong-sound.mp3"></audio>
+</body>
+</html>

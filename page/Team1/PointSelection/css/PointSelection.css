@@ -48,16 +48,16 @@ body {
 
 /* 按钮网格容器 */
 .grid {
-    margin-top: 220px;
+    margin-top: 120px;
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 4列布局 */
-    grid-gap: 30px;
+    grid-template-columns: repeat(3, 1fr); /* 4列布局 */
+    grid-gap: 20px;
     justify-items: center;
 }
 
 .question-item {
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 400px;
     /* 背景颜色已被图片替代 */
     background-image: url(../../../../assets/images/button-small.webp);
     background-position: center; /* 背景图片居中 */
@@ -66,7 +66,7 @@ body {
 
     font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
     font-weight: bold;
-    font-size: 80px;
+    font-size: 130px;
     color: #7b1800;
     display: flex;
     align-items: center;

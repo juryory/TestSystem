@@ -48,16 +48,16 @@ body {
 
 /* 按钮网格容器 */
 .grid {
-    margin-top: 220px;
+    margin-top: 180px;
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 4列布局 */
-    grid-gap: 30px;
+    grid-template-columns: repeat(6, 2fr); /* 4列布局 */
+    grid-gap: 0px;
     justify-items: center;
 }
 
 .question-item {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     /* 背景颜色已被图片替代 */
     background-image: url(../../../../assets/images/button-small.webp);
     background-position: center; /* 背景图片居中 */
@@ -84,28 +84,6 @@ body {
     visibility: hidden;
 }
 
-/* 下一轮按钮容器 */
-.next-round-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 30px;
-    margin-top: 20px;
-}
-
-/* 下一轮按钮 */
-.next-round-button {
-    width: 150px;
-    height: 50px;
-    background-color: #F6CA77;
-    color: #7b1800;
-    font-size: 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-}
-
-.next-round-button:hover {
+/* .next-round-button:hover {
     background-color: #F0C17F;
-}
+} */

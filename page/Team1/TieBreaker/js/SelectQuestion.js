@@ -1,8 +1,18 @@
 // 页面标识符，确保不同页面或组的按钮有不同的标识
-const pageIdentifier = 'MultipleChoise-1'; // SelectQuestion 页面标识符
-const columns = 3; // 4列
-const rows = 2; // 3行
+const pageIdentifier = 'TieBreaker-1'; // SelectQuestion 页面标识符
+const columns = 6; // 6列
+const rows = 1; // 1行
 const totalQuestions = columns * rows;
+
+// 定义每个按钮的文本
+const buttonTexts = [
+    "10分",  // 第一个按钮的文字
+    "20分",  // 第二个按钮的文字
+    "30分",  // 第三个按钮的文字
+    "40分",  // 第四个按钮的文字
+    "50分",  // 第五个按钮的文字
+    "60分"   // 第六个按钮的文字
+];
 
 // 获取按钮容器
 const grid = document.querySelector('.grid');
@@ -13,7 +23,9 @@ for (let i = 0; i < totalQuestions; i++) {
     questionItem.classList.add('question-item');
     questionItem.id = `question-${pageIdentifier}-${i + 1}`;  // 使用页面标识符
     questionItem.setAttribute('data-index', i);
-    questionItem.textContent = `${i + 1}`;
+    
+    // 使用数组中的文本替代按钮的编号
+    questionItem.textContent = buttonTexts[i];
 
     // 添加点击事件，隐藏按钮并保存状态
     questionItem.addEventListener('click', function() {
@@ -43,6 +55,6 @@ document.addEventListener('keydown', function(event) {
 });
 
 // 监听“下一轮”按钮的点击事件，跳转到指定网页
-document.querySelector('.next-round-button').addEventListener('click', function() {
-    window.location.href = '../PointSelection/PointSelection.html'; // 确保链接正确
-});
+// document.querySelector('.next-round-button').addEventListener('click', function() {
+//     window.location.href = '../MultipleChoise/SelectQuestion.html'; // 确保链接正确
+// });
