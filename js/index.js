@@ -26,15 +26,15 @@ for (let i = 0; i < totalQuestions; i++) {
 
     // 添加点击事件，隐藏按钮并保存状态
     questionItem.addEventListener('click', function() {
-        questionItem.classList.add('hidden');
+        // questionItem.classList.add('hidden');
         localStorage.setItem(`${pageIdentifier}-questionHidden-${i}`, 'true'); // 保存状态，带页面标识符
         window.location.href = links[i]; // 跳转到对应页面
     });
 
     // 检查 localStorage 中是否记录了隐藏状态
-    if (localStorage.getItem(`${pageIdentifier}-questionHidden-${i}`) === 'true') {
-        questionItem.classList.add('hidden');
-    }
+    // if (localStorage.getItem(`${pageIdentifier}-questionHidden-${i}`) === 'true') {
+    //     questionItem.classList.add('hidden');
+    // }
 
     // 添加到 grid 容器中
     grid.appendChild(questionItem);
@@ -47,6 +47,14 @@ document.addEventListener('keydown', function(event) {
             const questionIndex = item.getAttribute('data-index');
             localStorage.removeItem(`${pageIdentifier}-questionHidden-${questionIndex}`);
             item.classList.remove('hidden');
+        });
+    }
+
+    // 监听 "P" 键，按下 "P" 键时清除所有页面的按钮状态
+    if (event.key.toLowerCase() === 'p') {
+        localStorage.clear(); // 清除 localStorage 中的所有数据
+        document.querySelectorAll('.question-item').forEach(item => {
+            item.classList.remove('hidden'); // 显示所有按钮
         });
     }
 });

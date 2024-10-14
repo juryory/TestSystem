@@ -40,4 +40,12 @@ document.addEventListener('keydown', function(event) {
             item.classList.remove('hidden');
         });
     }
+
+    // 监听 "P" 键，按下 "P" 键时清除所有页面的按钮状态
+    if (event.key.toLowerCase() === 'p') {
+        localStorage.clear(); // 清除 localStorage 中的所有数据
+        document.querySelectorAll('.question-item').forEach(item => {
+            item.classList.remove('hidden'); // 显示所有按钮
+        });
+    }
 });

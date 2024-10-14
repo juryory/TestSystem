@@ -48,15 +48,23 @@ for (let i = 0; i < totalQuestions; i++) {
 }
 
 // 监听键盘事件，按下 "K" 键时重置按钮状态
-// document.addEventListener('keydown', function(event) {
-//     if (event.key.toLowerCase() === 'k') {
-//         document.querySelectorAll('.question-item').forEach(item => {
-//             const questionIndex = item.getAttribute('data-index');
-//             localStorage.removeItem(`${pageIdentifier}-questionHidden-${questionIndex}`);
-//             item.classList.remove('hidden');
-//         });
-//     }
-// });
+document.addEventListener('keydown', function(event) {
+    if (event.key.toLowerCase() === 'k') {
+        document.querySelectorAll('.question-item').forEach(item => {
+            const questionIndex = item.getAttribute('data-index');
+            localStorage.removeItem(`${pageIdentifier}-questionHidden-${questionIndex}`);
+            item.classList.remove('hidden');
+        });
+    }
+    
+    // 监听 "P" 键，按下 "P" 键时清除所有页面的按钮状态
+    if (event.key.toLowerCase() === 'p') {
+        localStorage.clear(); // 清除 localStorage 中的所有数据
+        document.querySelectorAll('.question-item').forEach(item => {
+            item.classList.remove('hidden'); // 显示所有按钮
+        });
+    }
+});
 
 // 监听“下一轮”按钮的点击事件，跳转到指定网页
 document.querySelector('.next-round-button').addEventListener('click', function() {
