@@ -6,11 +6,11 @@ const totalQuestions = columns * rows;
 
 // 按钮对应的跳转链接
 const links = [
-    '../page/Team1/SingleChoice/SelectQuestion.html',  // 第一个按钮的跳转地址
-    '../page/Team2/SingleChoice/SelectQuestion.html',  // 第二个按钮的跳转地址
-    '../page/Team3/SingleChoice/SelectQuestion.html',  // 第三个按钮的跳转地址
-    '../page/Team4/SingleChoice/SelectQuestion.html',  // 第四个按钮的跳转地址
-    '../page/Team5/SingleChoice/SelectQuestion.html'   // 第五个按钮的跳转地址
+    '../page/Team1/010-SingleChoice/SelectQuestion.html',  // 第一个按钮的跳转地址
+    '../page/Team2/010-SingleChoice/SelectQuestion.html',  // 第二个按钮的跳转地址
+    '../page/Team3/010-SingleChoice/SelectQuestion.html',  // 第三个按钮的跳转地址
+    '../page/Team4/010-SingleChoice/SelectQuestion.html',  // 第四个按钮的跳转地址
+    '../page/Team5/010-SingleChoice/SelectQuestion.html'   // 第五个按钮的跳转地址
 ];
 
 // 获取按钮容器
