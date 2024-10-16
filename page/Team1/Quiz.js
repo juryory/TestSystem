@@ -72,6 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const optionInput = document.getElementById(`option${index}`);
                 const optionLabel = document.getElementById(`label${index}`);
 
+                // 如果是单选题，重置所有选项的文字颜色
+                if (!isMultiSelect) {
+                    resetOptionColors();
+                }
+
                 optionInput.checked = !optionInput.checked;  // 切换选中状态
 
                 // 切换选项的文字颜色
@@ -86,6 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (event.key === 'Enter') {
                 submitAnswer();  // 调用提交答案函数
             }
+        });
+    }
+
+    // 重置所有选项的文字颜色
+    function resetOptionColors() {
+        document.querySelectorAll('label').forEach(label => {
+            label.style.color = '';  // 恢复默认颜色
         });
     }
 
@@ -153,13 +165,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const answerText = document.getElementById("answer-text");
         const timerElement = document.getElementById("timer");  // 获取倒计时元素
 
-        // 隐藏倒计时并停止声音
-        if (timerRunning) {
-            clearInterval(timerInterval);
-            stopCountdownSound();
-            timerElement.style.display = 'none';
-            timerRunning = false;
-        }
+        // 隐藏倒计时并停止声音，无论倒计时是否运行
+        clearInterval(timerInterval);  // 清除倒计时
+        stopCountdownSound();  // 停止倒计时声音
+        timerElement.style.display = 'none';  // 隐藏倒计时文字
+        timerRunning = false;  // 将倒计时状态设置为 false
 
         console.log("正确答案: ", correctAnswer);
         console.log("用户提交的答案: ", userAnswerString);
