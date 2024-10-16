@@ -1,5 +1,5 @@
 // 设置 pageIdentifier 和 tag 相同
-const pageIdentifier = '第一组单选必答'; // 使用统一的标识符
+const pageIdentifier = '第四组20分题'; // 使用统一的标识符
 const tag = pageIdentifier;  // tag 与 pageIdentifier 相同
 
 // 函数用于查询 tag 的值
@@ -9,14 +9,14 @@ function getTag() {
 
 // 监听“下一轮”按钮的点击事件，跳转到指定网页
 document.querySelector('.next-round-button').addEventListener('click', function() {
-    window.location.href = '../020-MultipleChoise/SelectQuestion.html';  // 确保链接正确
+    window.location.href = '../030-PointSelection/PointSelection.html';  // 确保链接正确
 });
 
 // 获取按钮容器
 const grid = document.querySelector('.grid');
 
 // 加载 CSV 文件并根据 tag 过滤题目
-Papa.parse("../questions1.csv", {
+Papa.parse("../questions4.csv", {
     download: true,
     header: true,
     complete: function(results) {

@@ -1,5 +1,5 @@
 // 设置 pageIdentifier 和 tag 相同
-const pageIdentifier = '第一组单选必答'; // 使用统一的标识符
+const pageIdentifier = '第二组单选必答'; // 使用统一的标识符
 const tag = pageIdentifier;  // tag 与 pageIdentifier 相同
 
 // 函数用于查询 tag 的值
@@ -16,7 +16,7 @@ document.querySelector('.next-round-button').addEventListener('click', function(
 const grid = document.querySelector('.grid');
 
 // 加载 CSV 文件并根据 tag 过滤题目
-Papa.parse("../questions1.csv", {
+Papa.parse("../questions2.csv", {
     download: true,
     header: true,
     complete: function(results) {

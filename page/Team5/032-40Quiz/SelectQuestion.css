@@ -1,0 +1,129 @@
+.question-item {
+    width: 200px;
+    height: 200px;
+    margin-top: 60px;
+    font-size: 100px;
+    background-image: url(/assets/images/button-small.webp);
+    background-position: center; /* 背景图片居中 */
+    background-size: cover; /* 让图片覆盖整个按钮 */
+    background-repeat: no-repeat; /* 防止图片重复 */
+    font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
+    font-weight: bold;
+    color: #7b1800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* 按钮网格容器 */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 20px;
+    justify-items: center;
+}
+
+/* body 样式：整体背景和尺寸固定 */
+body {
+    height: 1060px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; /* 背景颜色（可选） */
+}
+
+/* 1.1 container */
+.container {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    background-image: url(/assets/images/background.webp); /* 背景图片 */
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* 标题容器 */
+.title-section {
+    width: 1920px;
+    height: 170px;
+    text-align: center;
+}
+
+.title-section h1 {
+    font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
+    font-weight: bold;
+    font-size: 114px;
+    color: #e9c388;
+    text-shadow: 0 9px 13px rgba(0, 0, 0, 0.5); /* 阴影 */
+}
+
+/* 选题容器 */
+.question-section {
+    margin-left: 150px;
+    width: 1620px;
+    height: 640px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    border: 5px solid #e9c388;
+    position: relative;
+}
+
+.question-item:hover {
+    transform: scale(1.05);
+}
+
+/* 隐藏按钮但保留布局 */
+.hidden {
+    visibility: hidden;
+}
+
+/* 下一轮按钮容器 */
+.next-round-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+    margin-top: 20px;
+}
+
+/* 下一轮按钮 */
+.next-round-button {
+    width: 150px;
+    height: 50px;
+    background-color: #F6CA77;
+    color: #7b1800;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.next-round-button:hover {
+    background-color: #F0C17F;
+}
+
+.bottom-links {
+    position: fixed;
+    bottom: 40px; /* 距离底部 10px */
+    left: 40px;   /* 距离左边 10px */
+}
+
+.bottom-links a {
+    margin-right: 40px; /* 链接之间的间隔 20px */
+    text-decoration: none;
+    color: #7b1800; /* 链接文字颜色 */
+    font-size: 18px;
+    font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
+    font-weight: 800;
+}
+
+.bottom-links a:last-child {
+    margin-right: 0; /* 最后一个链接不需要右边的间隔 */
+}
+
+.bottom-links a:hover {
+    text-decoration: underline;
+}

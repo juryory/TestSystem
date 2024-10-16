@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单选必答题-选题页面</title>
+    <link rel="stylesheet" href="SelectQuestion.css"> <!-- 引用外部CSS -->
+</head>
+<body>
+    <div class="container">
+        <!-- 1.1.1 section: 标题容器 -->
+        <section class="title-section">
+            <h1>单选必答题</h1>
+        </section>
+
+        <!-- 1.1.2 section: 选题容器 -->
+        <section class="question-section">
+            <div class="grid"></div> <!-- 按钮容器（由JS生成按钮）-->
+        </section>
+
+        <!-- 新增的“下一轮”按钮，放在选题容器下方 -->
+        <div class="next-round-container">
+            <button class="next-round-button">下一轮</button>
+        </div>
+
+        <!-- 添加左下角的超链接 -->
+        <div class="bottom-links">
+            <a href="../010-SingleChoice/SelectQuestion.html">单选必答</a>
+            <a href="../020-MultipleChoise/SelectQuestion.html">多选必答</a>
+            <a href="../030-PointSelection/PointSelection.html">分值选择</a>
+            <a href="../031-20Quiz/SelectQuestion.html">20分</a>
+            <a href="../032-40Quiz/SelectQuestion.html">40分</a>
+            <a href="../033-60Quiz/SelectQuestion.html">60分</a>
+            <a href="../040-TieBreaker/SelectQuestion.html">加赛</a>
+        </div>
+        
+    </div>
+
+    <script src="/js/papaparse.min.js"></script>
+    <script src="SelectQuestion.js"></script> <!-- 引用外部JS -->
+</body>
+</html>
