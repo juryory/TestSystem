@@ -58,6 +58,23 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             optionElement.style.fontSize = fontSize;
             optionsContainer.appendChild(optionElement);
+
+            // 添加点击事件监听器
+            const optionInput = document.getElementById(`option${index}`);
+            const optionLabel = document.getElementById(`label${index}`);
+
+            optionInput.addEventListener('click', function() {
+                if (!isMultiSelect) {
+                    resetOptionColors();  // 单选题时重置所有选项的颜色
+                }
+
+                // 切换当前选项的文字颜色
+                if (optionInput.checked) {
+                    optionLabel.style.color = '#f5f5f6';  // 选中时设置为黑色
+                } else {
+                    optionLabel.style.color = '';  // 取消选中时恢复默认颜色
+                }
+            });            
         });
 
         // 监听键盘按键事件
