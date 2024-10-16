@@ -130,7 +130,7 @@ body {
 .section3-timer-answer .text-block {
     font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
     font-weight: bold;
-    font-size: 160px;
+    font-size: 90px;
     color: #EDD19D;
     text-align: center;
     word-wrap: break-word; /* 自动换行 */
@@ -202,12 +202,12 @@ input[type="checkbox"] + label::before {
 
 /* 选中时的样式 */
 input[type="radio"]:checked + label::before {
-    background-color: #F6CA77;
-    box-shadow: inset 0 0 0 4px white;
+    background-color: #f67777;
+    box-shadow: inset 0 0 0 4px rgb(255, 0, 0);
 }
 
 input[type="checkbox"]:checked + label::before {
-    background-color: #F6CA77;
+    background-color: #f67777;
     content: "✓";
     color: white;
     font-size: 16px;
@@ -225,17 +225,17 @@ input[type="checkbox"] + label:hover::before {
 
 .bottom-links {
     position: fixed;
-    bottom: 40px; /* 距离底部 10px */
-    left: 40px;   /* 距离左边 10px */
+    bottom: 10px; /* 距离底部 10px */
+    left: 20px;   /* 距离左边 10px */
 }
 
 .bottom-links a {
     margin-right: 40px; /* 链接之间的间隔 20px */
     text-decoration: none;
-    color: #7b1800; /* 链接文字颜色 */
+    color: #a7693c; /* 链接文字颜色 */
     font-size: 18px;
     font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
-    font-weight: 800;
+    font-weight: 300;
 }
 
 .bottom-links a:last-child {

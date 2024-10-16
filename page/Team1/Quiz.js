@@ -36,49 +36,58 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-// 加载题目和选项
-function loadQuestion(questionData) {
-    const fontSize = questionData.font_size ? `${questionData.font_size}px` : '40px';
-    const questionText = document.getElementById("question-text");
-    questionText.textContent = questionData.question;
-    questionText.style.fontSize = fontSize;
+    // 加载题目和选项
+    function loadQuestion(questionData) {
+        const fontSize = questionData.font_size ? `${questionData.font_size}px` : '40px';
+        const questionText = document.getElementById("question-text");
+        questionText.textContent = questionData.question;
+        questionText.style.fontSize = fontSize;
 
-    const optionsContainer = document.getElementById("options");
-    optionsContainer.innerHTML = '';
+        const optionsContainer = document.getElementById("options");
+        optionsContainer.innerHTML = '';
 
-    const options = questionData.options.split('|');
-    correctAnswer = questionData.correct_answer.trim();  // 正确答案作为字符串
-    isMultiSelect = (questionData.type === 'multiple');
+        const options = questionData.options.split('|');
+        correctAnswer = questionData.correct_answer.trim();  // 正确答案作为字符串
+        isMultiSelect = (questionData.type === 'multiple');
 
-    options.forEach((option, index) => {
-        const optionElement = document.createElement("div");
-        optionElement.innerHTML = `
-            <input type="${isMultiSelect ? 'checkbox' : 'radio'}" id="option${index}" name="option" value="${String.fromCharCode(65 + index)}">
-            <label for="option${index}">${option}</label>
-        `;
-        optionElement.style.fontSize = fontSize;
-        optionsContainer.appendChild(optionElement);
-    });
+        options.forEach((option, index) => {
+            const optionElement = document.createElement("div");
+            optionElement.innerHTML = `
+                <input type="${isMultiSelect ? 'checkbox' : 'radio'}" id="option${index}" name="option" value="${String.fromCharCode(65 + index)}">
+                <label for="option${index}" id="label${index}">${option}</label>
+            `;
+            optionElement.style.fontSize = fontSize;
+            optionsContainer.appendChild(optionElement);
+        });
 
-    // 监听键盘按键事件
-    document.addEventListener('keydown', function(event) {
-        const key = event.key.toUpperCase();
+        // 监听键盘按键事件
+        document.addEventListener('keydown', function(event) {
+            const key = event.key.toUpperCase();
 
-        // 检查是否按下了 A, B, C, D, E, F, G, H 对应的键
-        const validKeys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-        const index = validKeys.indexOf(key);
-        
-        if (index !== -1 && document.getElementById(`option${index}`)) {
-            const optionInput = document.getElementById(`option${index}`);
-            optionInput.checked = !optionInput.checked;  // 切换选中状态
-        }
+            // 检查是否按下了 A, B, C, D, E, F, G, H 对应的键
+            const validKeys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+            const index = validKeys.indexOf(key);
+            
+            if (index !== -1 && document.getElementById(`option${index}`)) {
+                const optionInput = document.getElementById(`option${index}`);
+                const optionLabel = document.getElementById(`label${index}`);
 
-        // 按下回车键时提交答案
-        if (event.key === 'Enter') {
-            submitAnswer();  // 调用提交答案函数
-        }
-    });
-}
+                optionInput.checked = !optionInput.checked;  // 切换选中状态
+
+                // 切换选项的文字颜色
+                if (optionInput.checked) {
+                    optionLabel.style.color = '#f5f5f6';  // 选中时变成黑色
+                } else {
+                    optionLabel.style.color = '';  // 取消选中时恢复默认颜色
+                }
+            }
+
+            // 按下回车键时提交答案
+            if (event.key === 'Enter') {
+                submitAnswer();  // 调用提交答案函数
+            }
+        });
+    }
 
     // 倒计时声音和结束声音
     let countdownSound = document.getElementById('countdown-sound');
@@ -142,72 +151,39 @@ function loadQuestion(questionData) {
         const userAnswerString = userAnswers.sort().join('').trim();
 
         const answerText = document.getElementById("answer-text");
+        const timerElement = document.getElementById("timer");  // 获取倒计时元素
+
+        // 隐藏倒计时并停止声音
+        if (timerRunning) {
+            clearInterval(timerInterval);
+            stopCountdownSound();
+            timerElement.style.display = 'none';
+            timerRunning = false;
+        }
 
         console.log("正确答案: ", correctAnswer);
         console.log("用户提交的答案: ", userAnswerString);
 
         if (userAnswerString === correctAnswer) {
-            answerText.textContent = `${correctAnswer}`;
+            answerText.innerHTML = `回答正确<br>${correctAnswer}`;
             correctSound.play();
         } else {
-            answerText.textContent = `${correctAnswer}`;
+            answerText.innerHTML = `回答错误<br>${correctAnswer}`;
             wrongSound.play();
         }
 
         answerText.style.display = 'block';
     }
 
-    // 显示答案并判断正确或错误
-    function showAnswer() {
-        const userAnswers = [];
-        document.querySelectorAll('input[name="option"]:checked').forEach(input => {
-            userAnswers.push(input.value);
-        });
-        const userAnswerString = userAnswers.sort().join('').trim();  // 将用户答案按字母顺序转为字符串
-
-        const answerText = document.getElementById("answer-text");
-
-        if (userAnswerString === correctAnswer) {
-            answerText.textContent = `${correctAnswer}`;
-            correctSound.play();  // 播放正确的声音
-        } else {
-            answerText.textContent = ` ${correctAnswer}`;
-            wrongSound.play();  // 播放错误的声音
-        }
-
-        answerText.style.display = 'block';
-        isAnswerVisible = true;
-    }
-
-    // D 键和 C 键功能
-    document.addEventListener('keydown', (event) => {
-        const key = event.key.toLowerCase();
-
-        if (key === 'y') {
-            handleDKeyPress();
-        } else if (key === 'n') {
-            handleCKeyPress();
-        }
-    });
-
-    function handleDKeyPress() {
-        if (!isAnswerVisible) {
-            showAnswer();  // 第一次按 Y 键显示答案
-        } else {
-            correctSound.play();  // 第二次按 Y 键播放正确答案提示音
-        }
-    }
-
-    function handleCKeyPress() {
-        if (!isAnswerVisible) {
-            showAnswer();  // 第一次按 N 键显示答案
-        } else {
-            wrongSound.play();  // 第二次按 N 键播放错误答案提示音
-        }
-    }
+    // 绑定提交按钮点击事件
+    document.getElementById("submit-answer").addEventListener("click", submitAnswer);
 
     // 返回选题页面
     document.getElementById("select-question").addEventListener("click", () => {
-        window.location.href = "SelectQuestion.html";  
+        window.location.href = "SelectQuestion.html";
     });
+
+    // 设置答案和倒计时的文字大小
+    document.getElementById("answer-text").style.fontSize = "80px";  // 设置答案文字大小
+    document.getElementById("timer").style.fontSize = "200px";  // 设置倒计时文字大小
 });
