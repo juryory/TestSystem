@@ -1,7 +1,6 @@
 /* body 样式：整体背景和尺寸固定 */
 body {
-    width: 100vw;
-    height: 100vh;
+    height: 1060px;
     display: flex;
     justify-content: center;
     align-items: center;

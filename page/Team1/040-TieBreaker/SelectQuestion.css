@@ -28,8 +28,7 @@
 
 /* body 样式：整体背景和尺寸固定 */
 body {
-    width: 100vw;
-    height: 100vh;
+    height: 1060px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -106,4 +105,28 @@ body {
 
 .next-round-button:hover {
     background-color: #F0C17F;
+}
+
+
+.bottom-links {
+    position: fixed;
+    bottom: 40px; /* 距离底部 10px */
+    left: 40px;   /* 距离左边 10px */
+}
+
+.bottom-links a {
+    margin-right: 40px; /* 链接之间的间隔 20px */
+    text-decoration: none;
+    color: #7b1800; /* 链接文字颜色 */
+    font-size: 18px;
+    font-family: 'Source Han Sans SC', sans-serif; /* 思源黑体 */
+    font-weight: 800;
+}
+
+.bottom-links a:last-child {
+    margin-right: 0; /* 最后一个链接不需要右边的间隔 */
+}
+
+.bottom-links a:hover {
+    text-decoration: underline;
 }

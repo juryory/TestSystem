@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // 获取正确和错误答案声音元素
+    let correctSound = document.getElementById('correct-sound');
+    let wrongSound = document.getElementById('wrong-sound');
+    
     // 获取 URL 参数中的题目序号和 tag
     function getQueryParam(param) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -11,15 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let correctAnswer = '';
     let isMultiSelect = false;
 
-    // 加载 CSV 文件并显示对应题目
+    // 加载 CSV 文件并显示题目
     Papa.parse("../questions1.csv", {
         download: true,
         header: true,
         complete: function(results) {
             const questions = results.data;
-            // 根据 tag 筛选题目
             const filteredQuestions = questions.filter(question => question.tag === tag);
-            const questionData = filteredQuestions[questionIndex]; // 从筛选后的题目中获取
+            const questionData = filteredQuestions[questionIndex];
 
             if (questionData) {
                 loadQuestion(questionData);
@@ -33,30 +36,49 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 加载题目和选项到页面
-    function loadQuestion(questionData) {
-        const fontSize = questionData.font_size ? `${questionData.font_size}px` : '40px';  // 设置字体大小
-        const questionText = document.getElementById("question-text");
-        questionText.textContent = questionData.question;
-        questionText.style.fontSize = fontSize;  // 应用自定义的字体大小
+// 加载题目和选项
+function loadQuestion(questionData) {
+    const fontSize = questionData.font_size ? `${questionData.font_size}px` : '40px';
+    const questionText = document.getElementById("question-text");
+    questionText.textContent = questionData.question;
+    questionText.style.fontSize = fontSize;
 
-        const optionsContainer = document.getElementById("options");
-        optionsContainer.innerHTML = ''; // 清空选项容器
+    const optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = '';
 
-        const options = questionData.options.split('|');
-        correctAnswer = questionData.correct_answer.split('|');
-        isMultiSelect = (questionData.type === 'multiple');
+    const options = questionData.options.split('|');
+    correctAnswer = questionData.correct_answer.trim();  // 正确答案作为字符串
+    isMultiSelect = (questionData.type === 'multiple');
 
-        // 动态生成选项并设置字体大小
-        options.forEach(option => {
-            const optionElement = document.createElement("div");
-            optionElement.innerHTML = `
-                <input type="${isMultiSelect ? 'checkbox' : 'radio'}" name="option" value="${option}"> ${option}
-            `;
-            optionElement.style.fontSize = fontSize;  // 设置选项字体大小
-            optionsContainer.appendChild(optionElement);
-        });
-    }
+    options.forEach((option, index) => {
+        const optionElement = document.createElement("div");
+        optionElement.innerHTML = `
+            <input type="${isMultiSelect ? 'checkbox' : 'radio'}" id="option${index}" name="option" value="${String.fromCharCode(65 + index)}">
+            <label for="option${index}">${option}</label>
+        `;
+        optionElement.style.fontSize = fontSize;
+        optionsContainer.appendChild(optionElement);
+    });
+
+    // 监听键盘按键事件
+    document.addEventListener('keydown', function(event) {
+        const key = event.key.toUpperCase();
+
+        // 检查是否按下了 A, B, C, D, E, F, G, H 对应的键
+        const validKeys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        const index = validKeys.indexOf(key);
+        
+        if (index !== -1 && document.getElementById(`option${index}`)) {
+            const optionInput = document.getElementById(`option${index}`);
+            optionInput.checked = !optionInput.checked;  // 切换选中状态
+        }
+
+        // 按下回车键时提交答案
+        if (event.key === 'Enter') {
+            submitAnswer();  // 调用提交答案函数
+        }
+    });
+}
 
     // 倒计时声音和结束声音
     let countdownSound = document.getElementById('countdown-sound');
@@ -111,46 +133,77 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 提交并查看答案按钮功能
-    document.getElementById("submit-answer").addEventListener("click", () => {
-        const timerElement = document.getElementById("timer");
+    // 提交答案的函数
+    function submitAnswer() {
+        const userAnswers = [];
+        document.querySelectorAll('input[name="option"]:checked').forEach(input => {
+            userAnswers.push(input.value);
+        });
+        const userAnswerString = userAnswers.sort().join('').trim();
+
         const answerText = document.getElementById("answer-text");
 
-        if (timerRunning) {
-            clearInterval(timerInterval);
-            stopCountdownSound();
-            timerRunning = false;
-        }
-        timerElement.style.display = 'none';  
-        showAnswer();
-    });
+        console.log("正确答案: ", correctAnswer);
+        console.log("用户提交的答案: ", userAnswerString);
 
-    // 显示答案
+        if (userAnswerString === correctAnswer) {
+            answerText.textContent = `${correctAnswer}`;
+            correctSound.play();
+        } else {
+            answerText.textContent = `${correctAnswer}`;
+            wrongSound.play();
+        }
+
+        answerText.style.display = 'block';
+    }
+
+    // 显示答案并判断正确或错误
     function showAnswer() {
         const userAnswers = [];
         document.querySelectorAll('input[name="option"]:checked').forEach(input => {
             userAnswers.push(input.value);
         });
+        const userAnswerString = userAnswers.sort().join('').trim();  // 将用户答案按字母顺序转为字符串
 
         const answerText = document.getElementById("answer-text");
 
-        if (arraysEqual(userAnswers.sort(), correctAnswer.sort())) {
-            answerText.textContent = `${correctAnswer.join(', ')}`;
+        if (userAnswerString === correctAnswer) {
+            answerText.textContent = `${correctAnswer}`;
+            correctSound.play();  // 播放正确的声音
         } else {
-            answerText.textContent = `${correctAnswer.join(', ')}`;
+            answerText.textContent = ` ${correctAnswer}`;
+            wrongSound.play();  // 播放错误的声音
         }
 
         answerText.style.display = 'block';
         isAnswerVisible = true;
     }
 
-    // 判断两个数组是否相等
-    function arraysEqual(arr1, arr2) {
-        if (arr1.length !== arr2.length) return false;
-        for (let i = 0; i < arr1.length; i++) {
-            if (arr1[i] !== arr2[i]) return false;
+    // D 键和 C 键功能
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+
+        if (key === 'y') {
+            handleDKeyPress();
+        } else if (key === 'n') {
+            handleCKeyPress();
         }
-        return true;
+    });
+
+    function handleDKeyPress() {
+        if (!isAnswerVisible) {
+            showAnswer();  // 第一次按 Y 键显示答案
+        } else {
+            correctSound.play();  // 第二次按 Y 键播放正确答案提示音
+        }
+    }
+
+    function handleCKeyPress() {
+        if (!isAnswerVisible) {
+            showAnswer();  // 第一次按 N 键显示答案
+        } else {
+            wrongSound.play();  // 第二次按 N 键播放错误答案提示音
+        }
     }
 
     // 返回选题页面
