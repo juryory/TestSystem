@@ -9,7 +9,7 @@ function getTag() {
 
 // 监听“下一轮”按钮的点击事件，跳转到指定网页
 document.querySelector('.next-round-button').addEventListener('click', function() {
-    window.location.href = '../020-MultipleChoise/SelectQuestion.html';  // 确保链接正确
+    window.location.href = '../020-multipleChoise/SelectQuestion.html';  // 确保链接正确
 });
 
 // 获取按钮容器

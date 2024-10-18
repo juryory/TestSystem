@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const options = questionData.options.split('|');
         correctAnswer = questionData.correct_answer.trim();  // 正确答案作为字符串
-        isMultiSelect = (questionData.type === 'multiple');
+        isMultiSelect = (questionData.type === '多选');
 
         options.forEach((option, index) => {
             const optionElement = document.createElement("div");
